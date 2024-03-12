@@ -3,10 +3,10 @@ import 'package:testdart/testdart.dart' as testdart;
 void main() {
   int a = 10;
   int b = 5;
-  int penjumlahan = a + b; // 15
-  int pengurangan = a - b; // 5
-  int perkalian = a * b; // 50
-  double pembagian = a / b; // 2.0
-  int pembagianBulat = a ~/ b; // 2
-  int modulus = a % b; // 0
+  bool isEqual = a == b; // false
+  bool isNotEqual = a != b; // true
+  bool isGreaterThan = a > b; // true
+  bool isLessThan = a < b; // false
+  bool isGreaterOrEqual = a >= b; // true
+  bool isLessOrEqual = a <= b; // false
 }
