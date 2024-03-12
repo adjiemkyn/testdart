@@ -8,17 +8,17 @@ class Kendaraan {
   }
 }
 
-class Mobil extends Kendaraan {
-  int tahunProduksi;
-  Mobil(String merk, this.tahunProduksi) : super(merk);
-  @override
-  void klakson() {
-    print("Tut! Tut!");
+mixin GPS {
+  void navigasi(String tujuan) {
+    print("Navigasi ke $tujuan");
   }
 }
 
+class Kapal extends Kendaraan with GPS {
+  Kapal(String merk) : super(merk);
+}
+
 void main() {
-  var mobilSaya = Mobil("Toyota", 2020);
-  mobilSaya.klakson(); // Output: Tut! Tut!
-  print(mobilSaya.merk); // Output: Toyota
+  var kapalSaya = Kapal("Titanic");
+  kapalSaya.navigasi("Atlantik"); // Output: Navigasi ke Atlantik
 }
