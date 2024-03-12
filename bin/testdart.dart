@@ -1,7 +1,10 @@
 import 'package:testdart/testdart.dart' as testdart;
 
 void main() {
-  void sapaPengguna(String nama) {
-    print('Halo, $nama!');
-  }
+  lakukanOperasi(5, 3, (x, y) => x + y); // Output: Hasil operasi: 8
+}
+
+void lakukanOperasi(int a, int b, Function operasi) {
+  var hasil = operasi(a, b);
+  print('Hasil operasi: $hasil');
 }
