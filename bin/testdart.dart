@@ -1,8 +1,9 @@
 import 'package:testdart/testdart.dart' as testdart;
 
 void main() {
-  var number = 100;
-  bool isInteger = number is int; // true
-  bool isNotInteger = number is! int; // false
-  (dynamic number as int).isEven;//Menggunakan 'as' untuk meng-cast dynamic ke int.
+  bool isTrue = true;
+  bool isFalse = false;
+  bool andResult = isTrue && isFalse; // false karena kedua nilai tidak true
+  bool orResult = isTrue || isFalse; // true karena salah satu nilai adalah true
+  bool notResult = !isTrue; // false karena nilai awal isTrue adalah tru
 }
