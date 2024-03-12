@@ -1,14 +1,22 @@
 import 'package:testdart/testdart.dart' as testdart;
 
 void main() {
-  aturVolume(volume: 10); // Output: Volume diatur ke 10
-  aturVolume(volume: 20, mute: true); // Output: Audio di-mute
+// Fungsi yang mengembalikan hasil penjumlahan dua bilangan.
+  int tambah(int a, int b) {
+    return a + b;
+  }
+
+// Fungsi yang mengembalikan teks berdasarkan kondisi.
+  String kategorikanUmur(int umur) {
+    if (umur < 18) {
+      return 'Remaja';
+    } else {
+      return 'Dewasa';
+    }
+  }
 }
 
-void aturVolume({required int volume, bool mute = false}) {
-  if (mute) {
-    print('Audio di-mute');
-  } else {
-    print('Volume diatur ke $volume');
-  }
+// Fungsi yang mengembalikan nilai boolean.
+bool apakahGenap(int angka) {
+  return angka % 2 == 0;
 }
