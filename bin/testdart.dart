@@ -1,15 +1,17 @@
 import 'package:testdart/testdart.dart' as testdart;
 
-class ContohKelas {
-  static const String konstantaKelas = 'Nilai konstan';
-  static void metodeStatis() {
-    print('Ini adalah metode statis');
-  }
-}
-
 void main() {
-// Mengakses properti statis tanpa membuat instansi dari kelas
-  print(ContohKelas.konstantaKelas); // Output: Nilai konstan
-// Memanggil metode statis
-  ContohKelas.metodeStatis(); // Output: Ini adalah metode statis
+  try {
+// Kode yang berpotensi menghasilkan exception karena tidak bisa membagi dengan 0
+    var hasilBagi = 100 ~/ 0;
+  } on IntegerDivisionByZeroException {
+// Menangani pembagian dengan nol
+    print('Tidak dapat membagi dengan nol.');
+  } catch (e) {
+// Menangani exception lainnya
+    print('Terjadi kesalahan: $e');
+  } finally {
+// Blok kode ini akan selalu dijalankan
+    print('Operasi selesai.');
+  }
 }
