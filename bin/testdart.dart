@@ -1,24 +1,15 @@
 import 'package:testdart/testdart.dart' as testdart;
 
-class Kendaraan {
-  String merk;
-  Kendaraan(this.merk);
-  void klakson() {
-    print("Tin! Tin!");
+class ContohKelas {
+  static const String konstantaKelas = 'Nilai konstan';
+  static void metodeStatis() {
+    print('Ini adalah metode statis');
   }
-}
-
-mixin GPS {
-  void navigasi(String tujuan) {
-    print("Navigasi ke $tujuan");
-  }
-}
-
-class Kapal extends Kendaraan with GPS {
-  Kapal(String merk) : super(merk);
 }
 
 void main() {
-  var kapalSaya = Kapal("Titanic");
-  kapalSaya.navigasi("Atlantik"); // Output: Navigasi ke Atlantik
+// Mengakses properti statis tanpa membuat instansi dari kelas
+  print(ContohKelas.konstantaKelas); // Output: Nilai konstan
+// Memanggil metode statis
+  ContohKelas.metodeStatis(); // Output: Ini adalah metode statis
 }
