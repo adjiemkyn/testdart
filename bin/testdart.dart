@@ -1,10 +1,22 @@
 import 'package:testdart/testdart.dart' as testdart;
 
-void main() {
-  lakukanOperasi(5, 3, (x, y) => x + y); // Output: Hasil operasi: 8
+class Mobil {
+  String merk;
+  int tahunProduksi;
+// Konstruktor
+  Mobil(this.merk, this.tahunProduksi);
+// Metode
+  void klakson() {
+    print('Tin! Tin!');
+  }
 }
 
-void lakukanOperasi(int a, int b, Function operasi) {
-  var hasil = operasi(a, b);
-  print('Hasil operasi: $hasil');
+void main() {
+// Membuat objek dari kelas Mobil
+  Mobil mobilSaya = Mobil('Daihatsu', 2022);
+// Mengakses properti objek
+  print(mobilSaya.merk); // Output: Daihatsu
+  print(mobilSaya.tahunProduksi); // Output: 2022
+// Memanggil metode pada objek
+  mobilSaya.klakson(); // Output: Tin! Tin!
 }
