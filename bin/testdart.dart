@@ -1,36 +1,78 @@
 import 'package:testdart/testdart.dart' as testdart;
 
-//Definisi Exception Khusus
-class UserNotFoundException implements Exception {
-  String cause;
-  UserNotFoundException(this.cause);
+class Buku {
+  String judul;
+  String pengarang;
+  bool dipinjam;
+  Buku(this.judul, this.pengarang) : dipinjam = false;
+  void pinjam() {
+    if (dipinjam) {
+      throw Exception('Buku sudah dipinjam!');
+    }
+    dipinjam = true;
+  }
+
+  void kembali() {
+    dipinjam = false;
+  }
+
+  @override
+  String toString() {
+    return 'Buku: $judul oleh $pengarang';
+  }
 }
 
-class PaymentDeclinedException implements Exception {
-  String cause;
-  PaymentDeclinedException(this.cause);
-}
+class Perpustakaan {
+  List<Buku> katalog = [];
+  void tambahBuku(Buku buku) {
+    katalog.add(buku);
+  }
 
-//Melempar Exception
-void processPayment(String userId, double amount) {
-  if (userId.isEmpty) {
-    throw UserNotFoundException('User ID tidak ditemukan.');
+  Buku? cariBuku(String judul) {
+    for (var buku in katalog) {
+      if (buku.judul.toLowerCase() == judul.toLowerCase()) {
+        return buku;
+      }
+    }
+    return null;
   }
-  if (amount <= 0) {
-    throw PaymentDeclinedException('Jumlah pembayaran tidak valid.');
+
+  void pinjamBuku(String judul) {
+    try {
+      var buku = cariBuku(judul);
+      buku?.pinjam();
+      print('Buku "$judul" berhasil dipinjam.');
+    } on Exception catch (e) {
+      print(e);
+    }
   }
-// Logika pembayaran...
-  print('Pembayaran berhasil untuk user $userId sejumlah $amount');
+
+  void kembalikanBuku(String judul) {
+    var buku = cariBuku(judul);
+    if (buku != null && buku.dipinjam) {
+      buku.kembali();
+      print('Buku "$judul" berhasil dikembalikan.');
+    } else {
+      print('Buku "$judul" tidak ditemukan atau belum dipinjam.');
+    }
+  }
+
+  void tampilkanKatalog() {
+    print('Katalog Perpustakaan:');
+    for (var buku in katalog) {
+      if (!buku.dipinjam) {
+        print(buku);
+      }
+    }
+  }
 }
 
 void main() {
-  try {
-    processPayment('', 100.0);
-  } on UserNotFoundException catch (e) {
-    print('Kesalahan: ${e.cause}');
-  } on PaymentDeclinedException catch (e) {
-    print('Kesalahan: ${e.cause}');
-  } catch (e) {
-    print('Terjadi kesalahan yang tidak diketahui: $e');
-  }
+  var perpustakaan = Perpustakaan();
+  perpustakaan.tambahBuku(Buku('Dart Fundamentals', 'Dart Author'));
+  perpustakaan.tambahBuku(Buku('Flutter Development', 'Flutter Author'));
+  perpustakaan.pinjamBuku('Dart Fundamentals');
+  perpustakaan.pinjamBuku('Dart Fundamentals'); // Ini akan melempar exception
+  perpustakaan.kembalikanBuku('Dart Fundamentals');
+  perpustakaan.tampilkanKatalog();
 }
