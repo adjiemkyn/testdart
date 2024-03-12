@@ -1,9 +1,18 @@
 import 'package:testdart/testdart.dart' as testdart;
 
 void main() {
-  int x = 0;
-  do {
-    print('x = $x');
-    x++;
-  } while (x < 5);
+  var command = 'CLOSE';
+  switch (command) {
+    case 'CLOSE':
+      print('Aplikasi ditutup.');
+      break;
+    case 'OPEN':
+      print('Aplikasi dibuka.');
+      break;
+    case 'DELETE':
+      print('Aplikasi dihapus.');
+      break;
+    default:
+      print('Perintah tidak dikenali.');
+  }
 }
