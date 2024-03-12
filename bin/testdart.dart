@@ -1,17 +1,36 @@
 import 'package:testdart/testdart.dart' as testdart;
 
+//Definisi Exception Khusus
+class UserNotFoundException implements Exception {
+  String cause;
+  UserNotFoundException(this.cause);
+}
+
+class PaymentDeclinedException implements Exception {
+  String cause;
+  PaymentDeclinedException(this.cause);
+}
+
+//Melempar Exception
+void processPayment(String userId, double amount) {
+  if (userId.isEmpty) {
+    throw UserNotFoundException('User ID tidak ditemukan.');
+  }
+  if (amount <= 0) {
+    throw PaymentDeclinedException('Jumlah pembayaran tidak valid.');
+  }
+// Logika pembayaran...
+  print('Pembayaran berhasil untuk user $userId sejumlah $amount');
+}
+
 void main() {
   try {
-// Kode yang berpotensi menghasilkan exception karena tidak bisa membagi dengan 0
-    var hasilBagi = 100 ~/ 0;
-  } on IntegerDivisionByZeroException {
-// Menangani pembagian dengan nol
-    print('Tidak dapat membagi dengan nol.');
+    processPayment('', 100.0);
+  } on UserNotFoundException catch (e) {
+    print('Kesalahan: ${e.cause}');
+  } on PaymentDeclinedException catch (e) {
+    print('Kesalahan: ${e.cause}');
   } catch (e) {
-// Menangani exception lainnya
-    print('Terjadi kesalahan: $e');
-  } finally {
-// Blok kode ini akan selalu dijalankan
-    print('Operasi selesai.');
+    print('Terjadi kesalahan yang tidak diketahui: $e');
   }
 }
