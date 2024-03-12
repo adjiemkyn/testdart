@@ -3,20 +3,35 @@ import 'package:testdart/testdart.dart' as testdart;
 class Mobil {
   String merk;
   int tahunProduksi;
-// Konstruktor
+// Konstruktor dengan null safety
   Mobil(this.merk, this.tahunProduksi);
-// Metode
-  void klakson() {
-    print('Tin! Tin!');
+}
+
+class Akun {
+  String? namaPengguna; // Bisa bernilai null
+  String email; // Tidak boleh bernilai nul
+  Akun(this.email, {this.namaPengguna});
+}
+
+class Kalkulator {
+  int tambah(int a, int b) {
+    return a + b;
+  }
+
+  int? bagi(int a, int b) {
+    if (b == 0) return null; // Dapat mengembalikan null
+    return a ~/ b;
   }
 }
 
 void main() {
-// Membuat objek dari kelas Mobil
-  Mobil mobilSaya = Mobil('Daihatsu', 2022);
-// Mengakses properti objek
-  print(mobilSaya.merk); // Output: Daihatsu
-  print(mobilSaya.tahunProduksi); // Output: 2022
-// Memanggil metode pada objek
-  mobilSaya.klakson(); // Output: Tin! Tin!
+  var mobilSaya = Mobil('Toyota', 2021);
+  print('Merk Mobil: ${mobilSaya.merk}, Tahun: ${mobilSaya.tahunProduksi}');
+  var akunSaya = Akun('example@example.com');
+  print(
+      'Email: ${akunSaya.email}, Nama Pengguna: ${akunSaya.namaPengguna ?? 'tidak diketahui'}');
+  var kalkulator = Kalkulator();
+  print('Hasil tambah: ${kalkulator.tambah(10, 5)}');
+  var hasilBagi = kalkulator.bagi(10, 0);
+  print('Hasil bagi: ${hasilBagi ?? 'Operasi tidak valid'}');
 }
